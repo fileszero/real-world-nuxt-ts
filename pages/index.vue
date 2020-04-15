@@ -5,7 +5,7 @@
 </template>
 <script lang="ts">
 import { Context } from '@nuxt/types'
-import { Vue, Component } from 'vue-property-decorator'
+import { Vue, Component } from 'nuxt-property-decorator'
 @Component({
   head() {
     return {
