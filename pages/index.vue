@@ -14,6 +14,7 @@
 import { Context } from '@nuxt/types'
 import { Vue, Component } from 'nuxt-property-decorator'
 import EventCard from '@/components/EventCard.vue'
+import EventService from '@/services/EventService'
 @Component<Index>({
   components: {
     EventCard
@@ -27,7 +28,7 @@ import EventCard from '@/components/EventCard.vue'
     console.log('index.vue asyncData')
     // https://axios.nuxtjs.org/setup.html#typescript
     try {
-      const response = await context.$axios.get('http://localhost:3000/events')
+      const response = await EventService.getEvents()
       console.log('index.vue then')
       return {
         events: response.data

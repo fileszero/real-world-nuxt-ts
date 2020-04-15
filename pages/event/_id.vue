@@ -4,8 +4,11 @@
   </div>
 </template>
 <script lang="ts">
+/* eslint-disable no-console */
 import { Context } from '@nuxt/types'
 import { Vue, Component } from 'nuxt-property-decorator'
+import EventService from '@/services/EventService'
+
 @Component<Index>({
   head() {
     return {
@@ -23,7 +26,7 @@ import { Vue, Component } from 'nuxt-property-decorator'
     console.log('index.vue asyncData')
     // https://axios.nuxtjs.org/setup.html#typescript
     try {
-      const response = await context.$axios.get('http://localhost:3000/events/' + context.params.id)
+      const response = await EventService.getEvent(context.params.id)
       console.log('index.vue then')
       return {
         event: response.data
