@@ -1,13 +1,23 @@
 <template>
   <div>
     <h1>Events</h1>
+    <EventCard
+      v-for="(event, index) in events"
+      :key="index"
+      :event="event"
+      :data-index="index"
+    />
   </div>
 </template>
 <script lang="ts">
 /* eslint-disable no-console */
 import { Context } from '@nuxt/types'
 import { Vue, Component } from 'nuxt-property-decorator'
+import EventCard from '@/components/EventCard.vue'
 @Component<Index>({
+  components: {
+    EventCard
+  },
   head() {
     return {
       title: 'Event Listing'

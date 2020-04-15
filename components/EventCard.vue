@@ -9,17 +9,15 @@
     </div>
   </nuxt-link>
 </template>
-<script>
-export default {
-  name: 'EventCard',
-  props: {
-    event: Object
-  },
-  computed: {
-    parsedDate() {
-      const eventDate = new Date(this.event.date)
-      return eventDate.toDateString()
-    }
+<script lang="ts">
+import { Vue, Component, Prop } from 'nuxt-property-decorator'
+
+@Component({})
+export default class EventCard extends Vue {
+  @Prop() event!: { date: string }
+  get parsedDate() {
+    const eventDate = new Date(this.event.date)
+    return eventDate.toDateString()
   }
 }
 </script>
