@@ -34,6 +34,12 @@ import EventCard from '@/components/EventCard.vue'
           events: response.data
         }
       })
+      .catch((e) => {
+        context.error({
+          statusCode: 503,
+          message: 'unable to fetch this events at this time.please try again.'
+        })
+      })
   }
 })
 export default class Index extends Vue {
