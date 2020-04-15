@@ -23,23 +23,21 @@ import EventCard from '@/components/EventCard.vue'
       title: 'Event Listing'
     }
   },
-  asyncData(context: Context) {
+  async asyncData(context: Context) {
     console.log('index.vue asyncData')
     // https://axios.nuxtjs.org/setup.html#typescript
-    return context.$axios
-      .get('http://localhost:3000/events')
-      .then((response) => {
-        console.log('index.vue then')
-        return {
-          events: response.data
-        }
+    try {
+      const response = await context.$axios.get('http://localhost:3000/events')
+      console.log('index.vue then')
+      return {
+        events: response.data
+      }
+    } catch (e) {
+      context.error({
+        statusCode: 503,
+        message: 'unable to fetch this events at this time.please try again.'
       })
-      .catch((e) => {
-        context.error({
-          statusCode: 503,
-          message: 'unable to fetch this events at this time.please try again.'
-        })
-      })
+    }
   }
 })
 export default class Index extends Vue {
