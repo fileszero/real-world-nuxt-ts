@@ -1,23 +1,27 @@
 <template>
   <div>
-    <h1>Create an Event</h1>
+    <h1>Event # {{ id }}</h1>
   </div>
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
-@Component({
+@Component<Index>({
   head() {
     return {
-      title: 'Create an Event - Real World Events',
+      title: 'Event #' + this.id,
       meta: [
         {
           hid: 'description',
           name: 'description', // <-- for our meta description tag
-          content: 'You can create the event in your neighborhood'
+          content: 'What you need to know about event #' + this.id
         }
       ]
     }
   }
 })
-export default class Index extends Vue {}
+export default class Index extends Vue {
+  get id() {
+    return this.$route.params.id
+  }
+}
 </script>

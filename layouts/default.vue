@@ -8,7 +8,22 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 import NavBar from '@/components/NavBar.vue'
-@Component({ components: { NavBar } })
+@Component({
+  components: { NavBar },
+  head() {
+    return {
+      titleTemplate: '%s - Real World Events -',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description', // <-- for our meta description tag
+          content:
+            'Where you can find all the events taking place in your neighborhood'
+        }
+      ]
+    }
+  }
+})
 export default class Default extends Vue {}
 </script>
 <style>
