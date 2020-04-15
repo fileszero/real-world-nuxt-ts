@@ -4,6 +4,7 @@
   </div>
 </template>
 <script lang="ts">
+import { Context } from '@nuxt/types'
 import { Vue, Component } from 'vue-property-decorator'
 @Component({
   head() {
