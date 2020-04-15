@@ -6,12 +6,10 @@
 </template>
 
 <script lang="ts">
+import { Vue, Component } from 'vue-property-decorator'
 import NavBar from '@/components/NavBar.vue'
-export default {
-  components: {
-    NavBar
-  }
-}
+@Component({ components: { NavBar } })
+export default class Default extends Vue {}
 </script>
 <style>
 html {
