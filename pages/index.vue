@@ -13,5 +13,14 @@ import { Vue, Component } from 'nuxt-property-decorator'
     }
   }
 })
-export default class Index extends Vue {}
+export default class Index extends Vue {
+  asyncData(context: Context) {
+    // https://axios.nuxtjs.org/setup.html#typescript
+    context.$axios.get('http://localhost/3000/events').then((response) => {
+      return {
+        events: response.data
+      }
+    })
+  }
+}
 </script>
