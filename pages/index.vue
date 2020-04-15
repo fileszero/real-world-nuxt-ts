@@ -4,23 +4,29 @@
   </div>
 </template>
 <script lang="ts">
+/* eslint-disable no-console */
 import { Context } from '@nuxt/types'
 import { Vue, Component } from 'nuxt-property-decorator'
-@Component({
+@Component<Index>({
   head() {
     return {
       title: 'Event Listing'
     }
+  },
+  asyncData(context: Context) {
+    console.log('index.vue asyncData')
+    // https://axios.nuxtjs.org/setup.html#typescript
+    return context.$axios
+      .get('http://localhost:3000/events')
+      .then((response) => {
+        console.log('index.vue then')
+        return {
+          events: response.data
+        }
+      })
   }
 })
 export default class Index extends Vue {
-  asyncData(context: Context) {
-    // https://axios.nuxtjs.org/setup.html#typescript
-    context.$axios.get('http://localhost/3000/events').then((response) => {
-      return {
-        events: response.data
-      }
-    })
-  }
+  events: any
 }
 </script>
