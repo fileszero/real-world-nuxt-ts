@@ -13,11 +13,10 @@
 /* eslint-disable no-console */
 import { Context } from '@nuxt/types'
 import { Vue, Component } from 'nuxt-property-decorator'
-import { getModule } from 'vuex-module-decorators'
 
 import EventCard from '@/components/EventCard.vue'
 
-import {eventsStore} from '@/store'
+import { eventsStore } from '@/store'
 
 @Component<Index>({
   components: {

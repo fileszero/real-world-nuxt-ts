@@ -55,7 +55,12 @@ export default {
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) {}
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    extend(config, ctx) {
+      if (ctx.isDev) {
+        config.devtool = ctx.isClient ? 'source-map' : 'inline-source-map'
+      }
+    }
   },
   typescript: {
     typeCheck: true,
