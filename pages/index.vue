@@ -13,8 +13,12 @@
 /* eslint-disable no-console */
 import { Context } from '@nuxt/types'
 import { Vue, Component } from 'nuxt-property-decorator'
+import { getModule } from 'vuex-module-decorators'
+
 import EventCard from '@/components/EventCard.vue'
-import EventService from '@/services/EventService'
+
+import {eventsStore} from '@/store'
+
 @Component<Index>({
   components: {
     EventCard
@@ -24,16 +28,11 @@ import EventService from '@/services/EventService'
       title: 'Event Listing'
     }
   },
-  async asyncData(context: Context) {
-    console.log('index.vue asyncData')
-    // https://axios.nuxtjs.org/setup.html#typescript
+  async fetch(context: Context) {
     try {
-      const response = await EventService.getEvents()
-      console.log('index.vue then')
-      return {
-        events: response.data
-      }
+      await eventsStore.fetchEvents()
     } catch (e) {
+      console.log(e)
       context.error({
         statusCode: 503,
         message: 'unable to fetch this events at this time.please try again.'
@@ -42,6 +41,8 @@ import EventService from '@/services/EventService'
   }
 })
 export default class Index extends Vue {
-  events: any
+  get events() {
+    return eventsStore.events
+  }
 }
 </script>

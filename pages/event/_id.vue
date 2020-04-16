@@ -7,7 +7,7 @@
 /* eslint-disable no-console */
 import { Context } from '@nuxt/types'
 import { Vue, Component } from 'nuxt-property-decorator'
-import EventService from '@/services/EventService'
+import { EventService } from '@/services/EventService'
 
 @Component<Index>({
   head() {
