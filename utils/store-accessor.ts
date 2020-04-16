@@ -1,14 +1,15 @@
+/* eslint-disable import/no-mutable-exports */
 import { Store } from 'vuex'
 import { getModule } from 'vuex-module-decorators'
-import EventsModule from '@/store/Events'
+import EvendsModule from '@/store/Events'
 
-// eslint-disable-next-line import/no-mutable-exports
-let eventsStore: EventsModule
-// let someStore: Something
+let eventsStore: EvendsModule
 
-function initializeStores(store: Store<any>): void {
-  eventsStore = getModule(EventsModule, store)
-  // someStore = getModule(Something, store)
+// ストアを初期化する関数。rootのstoreを受け取って、モジュールを初期化する
+
+function initialiseStores(store: Store<any>): void {
+  // userStoreはここで初期化。
+  eventsStore = getModule(EvendsModule, store)
 }
 
-export { initializeStores, eventsStore /*, someStore */ }
+export { initialiseStores, eventsStore }

@@ -16,7 +16,7 @@ import { Vue, Component } from 'nuxt-property-decorator'
 
 import EventCard from '@/components/EventCard.vue'
 
-import { eventsStore } from '@/store'
+import { eventsStore } from '~/store'
 
 @Component<Index>({
   components: {
@@ -27,6 +27,7 @@ import { eventsStore } from '@/store'
       title: 'Event Listing'
     }
   },
+
   async fetch(context: Context) {
     try {
       await eventsStore.fetchEvents()
@@ -41,7 +42,17 @@ import { eventsStore } from '@/store'
 })
 export default class Index extends Vue {
   get events() {
+    // const eventsStore = getModule(EventsModule, this.$store)
     return eventsStore.events
+  }
+
+  async fetch() {
+    try {
+      // const eventsStore = getModule(EventsModule, this.$store)
+      await eventsStore.fetchEvents()
+    } catch (e) {
+      console.log(e)
+    }
   }
 }
 </script>

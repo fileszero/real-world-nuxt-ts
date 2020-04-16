@@ -1,14 +1,19 @@
 import { Module, VuexModule, Mutation, Action } from 'vuex-module-decorators'
 import { EventService, Event } from '@/services/EventService'
 
+// Stateの型を定義する
+export interface EventsState {
+  events: Event[]
+}
+
 // https://github.com/championswimmer/vuex-module-decorators#using-the-decorators-with-serversiderender
 @Module({
-  name: 'EventsModule',
+  name: 'Events', // For Nuxt usage you should match the filename and namespace of your module
   namespaced: true,
   stateFactory: true
 })
-export default class EventsModule extends VuexModule {
-  events: Event[] = []
+export default class EventsModule extends VuexModule implements EventsState {
+  public events: Event[] = []
 
   @Mutation
   SET_EVENTS(events: Event[]) {
@@ -17,7 +22,12 @@ export default class EventsModule extends VuexModule {
 
   @Action
   async fetchEvents() {
-    const events = await EventService.getEvents()
-    this.SET_EVENTS(events)
+    console.log('fetchEvents')
+    try {
+      const events = await EventService.getEvents()
+      this.SET_EVENTS(events)
+    } catch (e) {
+      console.log('fetchEvents error :' + e)
+    }
   }
 }

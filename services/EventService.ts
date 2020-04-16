@@ -27,13 +27,13 @@ const apiClient = axios.create({
 })
 
 class EventServiceImpl {
-  private static _instance = new EventServiceImpl()
-  // eslint-disable-next-line no-useless-constructor
-  private constructor() {}
+  // private static _instance = new EventServiceImpl()
+  // // eslint-disable-next-line no-useless-constructor
+  // private constructor() {}
 
-  static get instance() {
-    return this._instance
-  }
+  // static get instance() {
+  //   return this._instance
+  // }
 
   public async getEvents() {
     const response = await apiClient.get('/events')
@@ -45,4 +45,5 @@ class EventServiceImpl {
   }
 }
 
-export const EventService = EventServiceImpl.instance
+// export const EventService = EventServiceImpl.instance
+export const EventService = new EventServiceImpl()
