@@ -7,7 +7,7 @@
 /* eslint-disable no-console */
 import { Context } from '@nuxt/types'
 import { Vue, Component } from 'nuxt-property-decorator'
-import { EventService } from '@/services/EventService'
+import { eventsStore } from '~/store'
 
 @Component<Index>({
   head() {
@@ -22,15 +22,12 @@ import { EventService } from '@/services/EventService'
       ]
     }
   },
-  async asyncData(context: Context) {
+  async fetch(context: Context) {
     console.log('index.vue asyncData')
     // https://axios.nuxtjs.org/setup.html#typescript
     try {
-      const response = await EventService.getEvent(context.params.id)
+      await eventsStore.fetchEvent(context.params.id)
       console.log('index.vue then')
-      return {
-        event: response.data
-      }
     } catch (e) {
       context.error({
         statusCode: 503,
@@ -40,7 +37,10 @@ import { EventService } from '@/services/EventService'
   }
 })
 export default class Index extends Vue {
-  event: any
+  get event() {
+    return eventsStore.event
+  }
+
   get id() {
     return this.$route.params.id
   }

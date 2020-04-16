@@ -40,8 +40,10 @@ class EventServiceImpl {
     return response.data as Event[]
   }
 
-  public getEvent(id: number | string) {
-    return apiClient.get('/events/' + id)
+  public async getEvent(id: number | string) {
+    const response = await apiClient.get('/events/' + id)
+    const event = response.data as Event
+    return event
   }
 }
 

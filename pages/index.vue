@@ -46,13 +46,13 @@ export default class Index extends Vue {
     return eventsStore.events
   }
 
-  async fetch() {
-    try {
-      // const eventsStore = getModule(EventsModule, this.$store)
-      await eventsStore.fetchEvents()
-    } catch (e) {
-      console.log(e)
-    }
-  }
+  // async fetch() {
+  //   try {
+  //     // const eventsStore = getModule(EventsModule, this.$store)
+  //     await eventsStore.fetchEvents()
+  //   } catch (e) {
+  //     console.log(e)
+  //   }
+  // }
 }
 </script>
