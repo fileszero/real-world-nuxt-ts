@@ -46,8 +46,8 @@ export default class Index extends Vue {
     return eventsStore.events
   }
 
-  mounted(){
-    console.log(process.env.API_KEY)
+  mounted() {
+    console.log(process.env.CLIENT_ID)
   }
   // async fetch() {
   //   try {

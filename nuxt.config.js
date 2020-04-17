@@ -1,3 +1,8 @@
+let envFile = '.env'
+if (process.env.NODE_ENV) {
+  envFile = '.env.' + process.env.NODE_ENV
+}
+
 export default {
   mode: 'universal',
   // mode: 'spa',
@@ -36,7 +41,7 @@ export default {
     '@nuxt/typescript-build',
     // Doc: https://github.com/nuxt-community/stylelint-module
     '@nuxtjs/stylelint-module',
-    '@nuxtjs/dotenv'
+    ['@nuxtjs/dotenv', { path: 'config/', filename: envFile }]
   ],
   /*
    ** Nuxt.js modules
