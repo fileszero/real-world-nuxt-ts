@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",
+    "msal": "^1.2.2",
     "nuxt": "^2.0.0",
     "nuxt-property-decorator": "^2.5.1"
   },
