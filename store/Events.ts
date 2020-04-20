@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { Module, VuexModule, Mutation, Action } from 'vuex-module-decorators'
 import { EventService, Event } from '@/services/EventService'
 

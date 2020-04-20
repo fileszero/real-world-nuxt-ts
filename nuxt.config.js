@@ -30,6 +30,9 @@ export default {
    ** Global CSS
    */
   css: [],
+  router: {
+    middleware: 'MSALLogin'
+  },
   /*
    ** Plugins to load before mounting the App
    */

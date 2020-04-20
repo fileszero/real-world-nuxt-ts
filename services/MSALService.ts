@@ -9,6 +9,8 @@ export default class MSALService {
     validateAuthority: true,
     redirectUri: window.location.href, // "http://localhost:8088",    //window.location.href,
     postLogoutRedirectUri: window.location.href, // "http://localhost:8088",    //window.location.href,
+    // redirectUri: 'http://localhost:3000', //window.location.href,
+    // postLogoutRedirectUri: 'http://localhost:3000', //window.location.href,
     navigateToLoginRequestUrl: true
   }
 
@@ -20,8 +22,8 @@ export default class MSALService {
 
   constructor(clientId: string, tenantId: string) {
     console.log('AuthService created..........')
-    console.log(window.location.href)
-    console.log(window.location.hash)
+    // console.log(window.location.href)
+    // console.log(window.location.hash)
     this.auth = Object.assign(this.AuthDefault, {
       clientId,
       authority: `https://login.microsoftonline.com/${tenantId}`

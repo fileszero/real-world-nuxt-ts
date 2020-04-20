@@ -7,6 +7,14 @@
       :event="event"
       :data-index="index"
     />
+    <h1>Forecasts</h1>
+    <div v-for="(forecast, idx) in forecasts" :key="`f${idx}`">
+      {{ forecast.Date }}
+      {{ forecast.TemperatureC }}
+      {{ forecast.TemperatureF }}
+      {{ forecast.Summary }}
+      {{ forecast.Commect }}
+    </div>
   </div>
 </template>
 <script lang="ts">
@@ -16,7 +24,7 @@ import { Vue, Component } from 'nuxt-property-decorator'
 
 import EventCard from '@/components/EventCard.vue'
 
-import { eventsStore } from '~/store'
+import { eventsStore, weatherStore } from '~/store'
 
 @Component<Index>({
   components: {
@@ -31,6 +39,7 @@ import { eventsStore } from '~/store'
   async fetch(context: Context) {
     try {
       await eventsStore.fetchEvents()
+      await weatherStore.fetchForecasts()
     } catch (e) {
       console.log(e)
       context.error({
@@ -44,6 +53,10 @@ export default class Index extends Vue {
   get events() {
     // const eventsStore = getModule(EventsModule, this.$store)
     return eventsStore.events
+  }
+
+  get forecasts() {
+    return weatherStore.forecasts
   }
 
   mounted() {
