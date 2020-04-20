@@ -8,8 +8,22 @@ declare module '*.vue' {
   export default _default
 }
 // https://qiita.com/hareku/items/b3e7c5427d0f4cb822a7
-export interface Context {
-  // ...
-  $axios: NuxtAxiosInstance
-  $msal: MSALService
+
+// vueインスタンス用
+declare module 'vue/types/vue' {
+  interface Vue {
+    $axios: NuxtAxiosInstance
+    $msal: MSALService
+  }
+  interface Context {
+    $axios: NuxtAxiosInstance
+    $msal: MSALService
+  }
+}
+
+// store用
+declare module 'vuex' {
+  interface Store<S> {
+    $msal: MSALService
+  }
 }

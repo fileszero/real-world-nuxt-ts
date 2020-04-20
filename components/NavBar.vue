@@ -12,13 +12,18 @@
         Create
       </nuxt-link>
     </nav>
+    <button @click="Logout">Logout</button>
   </div>
 </template>
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator'
 
 @Component
-export default class NavBar extends Vue {}
+export default class NavBar extends Vue {
+  public Logout() {
+    this.$msal.logout()
+  }
+}
 </script>
 <style scoped>
 .brand {

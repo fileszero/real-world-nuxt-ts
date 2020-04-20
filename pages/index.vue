@@ -19,12 +19,12 @@
 </template>
 <script lang="ts">
 /* eslint-disable no-console */
-import { Context } from '@nuxt/types'
 import { Vue, Component } from 'nuxt-property-decorator'
 
 import EventCard from '@/components/EventCard.vue'
 
 import { eventsStore, weatherStore } from '~/store'
+import { WeatherService } from '@/services/WeatherService'
 
 @Component<Index>({
   components: {
@@ -33,19 +33,6 @@ import { eventsStore, weatherStore } from '~/store'
   head() {
     return {
       title: 'Event Listing'
-    }
-  },
-
-  async fetch(context: Context) {
-    try {
-      await eventsStore.fetchEvents()
-      await weatherStore.fetchForecasts()
-    } catch (e) {
-      console.log(e)
-      context.error({
-        statusCode: 503,
-        message: 'unable to fetch this events at this time.please try again.'
-      })
     }
   }
 })
@@ -59,8 +46,16 @@ export default class Index extends Vue {
     return weatherStore.forecasts
   }
 
-  mounted() {
-    console.log(process.env.CLIENT_ID)
+  async mounted() {
+    console.log('index.vue mounted')
+    try {
+      const res = await this.$msal.getApiToken([process.env.API_SCOPE || ''])
+      WeatherService.ApiToken = res.accessToken
+      await eventsStore.fetchEvents()
+      await weatherStore.fetchForecasts()
+    } catch (e) {
+      console.log(e)
+    }
   }
   // async fetch() {
   //   try {

@@ -4,8 +4,8 @@ if (process.env.NODE_ENV) {
 }
 
 export default {
-  // mode: 'universal',
-  mode: 'spa',
+  mode: 'universal',
+  // mode: 'spa',
   /*
    ** Headers of the page
    */
@@ -30,9 +30,6 @@ export default {
    ** Global CSS
    */
   css: [],
-  router: {
-    middleware: 'MSALLogin'
-  },
   /*
    ** Plugins to load before mounting the App
    */
