@@ -21,8 +21,11 @@ export interface WeatherForecast {
 class WeatherServiceImpl {
   public set ApiToken(token: string) {
     // eslint-disable-next-line no-console
-    console.log('set ApiToken ' + token)
-    apiClient.defaults.headers.common.Authorization = `Bearer ${token}`
+    const auth = `Bearer ${token}`
+    if (apiClient.defaults.headers.common.Authorization !== auth) {
+      console.log('set ApiToken ' + token)
+      apiClient.defaults.headers.common.Authorization = auth
+    }
   }
 
   public async getWeathers() {
