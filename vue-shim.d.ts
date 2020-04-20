@@ -1,5 +1,5 @@
 import { NuxtAxiosInstance } from '@nuxtjs/axios'
-
+import MSALService from '@/services/MSALService'
 // https://typescript.nuxtjs.org/ja/guide/setup.html#%E8%A8%AD%E5%AE%9A
 // http://tech.innovation.co.jp/2019/01/25/Nuxt-Typescript.html
 
@@ -11,4 +11,5 @@ declare module '*.vue' {
 export interface Context {
   // ...
   $axios: NuxtAxiosInstance
+  $msal: MSALService
 }

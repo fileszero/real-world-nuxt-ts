@@ -6,6 +6,8 @@
 </template>
 
 <script lang="ts">
+/* eslint-disable no-console */
+import { Context } from '@nuxt/types'
 import { Vue, Component } from 'nuxt-property-decorator'
 import NavBar from '@/components/NavBar.vue'
 @Component({
@@ -22,9 +24,24 @@ import NavBar from '@/components/NavBar.vue'
         }
       ]
     }
+  },
+  asyncData(context: Context) {
+    // eslint-disable-next-line no-console
+    console.log('default.vue asyncData....')
   }
 })
-export default class Default extends Vue {}
+export default class Default extends Vue {
+  created() {
+    console.log('default.vue created....')
+    if (!this.$msal.isAuthenticated()) {
+      this.$msal.login()
+    }
+    this.$msal.getApiToken([process.env.API_SCOPE || '']).then((res) => {
+      console.log('Set axios Authorization: ' + res.accessToken)
+      // this.$axios.defaults.headers.common.Authorization = `Bearer ${res.accessToken}`
+    })
+  }
+}
 </script>
 <style>
 html {

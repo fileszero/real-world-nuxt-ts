@@ -4,8 +4,8 @@ if (process.env.NODE_ENV) {
 }
 
 export default {
-  mode: 'universal',
-  // mode: 'spa',
+  // mode: 'universal',
+  mode: 'spa',
   /*
    ** Headers of the page
    */
@@ -33,7 +33,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: ['~/plugins/MSALPlugin'],
   /*
    ** Nuxt.js dev-modules
    */

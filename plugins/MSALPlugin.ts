@@ -1,20 +1,30 @@
-import Vue from 'vue'
+import { Plugin } from '@nuxt/types'
+
 import MSALService from '@/services/MSALService'
 
-export type Options = {
-  clientId: string
-  tenantId: string
-}
-
 declare module 'vue/types/vue' {
-  // 3. 拡張した Vue を定義します
   interface Vue {
     $msal: MSALService
   }
 }
 
-export default class AuthPlugin {
-  static install(Vue: any, options: Options): void {
-    Vue.prototype.$msal = new MSALService(options.clientId, options.tenantId)
+declare module '@nuxt/types' {
+  interface Context {
+    $msal: MSALService
   }
 }
+declare module 'vuex/types/index' {
+  interface Store<S> {
+    $msal: MSALService
+  }
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const MSALPlugin: Plugin = (context, inject) => {
+  inject(
+    'msal',
+    new MSALService(process.env.CLIENT_ID || '', process.env.TENANT_ID || '')
+  )
+}
+
+export default MSALPlugin
